@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example app</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
+
+    <script type="text/javascript">
+        var require = {
+            baseUrl: '/scripts',
+            paths: {
+                jquery: '/vendor/jquery/dist/jquery.min',
+                io: '/socket.io/socket.io'
+            },
+            shim: {
+                'core/sails.io': ['io']
+            }
+        };
+    </script>
+</head>
+
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <% if (!req.session.user) { %>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                <% } %>
+            </ul>
+            <% if (req.session.user) { %>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/user/logout">Logout</a></li>
+                </ul>
+            <% } %>
+        </div>
+    </div>
+</nav>
+<%- body %>
+</body>
+</html>
